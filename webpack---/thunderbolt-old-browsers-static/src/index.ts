@@ -1,0 +1,1 @@
+export const OLD_BROWSERS_DEPRECATION_VERSION = 'v5'

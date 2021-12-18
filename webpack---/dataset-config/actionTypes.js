@@ -1,0 +1,8 @@
+'use strict'
+
+export default {
+    SET_FILTER: 'SET_FILTER',
+    SET_SORT: 'SET_SORT',
+    SET_IS_DATASET_READY: 'SET_IS_DATASET_READY',
+    SET_FIXED_FILTER_ITEM: 'SET_FIXED_FILTER_ITEM',
+}

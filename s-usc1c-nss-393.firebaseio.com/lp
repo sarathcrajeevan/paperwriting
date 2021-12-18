@@ -1,0 +1,9 @@
+
+function pLPCommand(c, a1, a2, a3, a4) {
+parent.window["pLPCommand2"] && parent.window["pLPCommand2"](c, a1, a2, a3, a4);
+}
+function pRTLPCB(pN, data) {
+parent.window["pRTLPCB2"] && parent.window["pRTLPCB2"](pN, data);
+}
+         pLPCommand('start','629854','da6pCo6ohx');
+pRTLPCB(0,[{"t":"c","d":{"t":"h","d":{"ts":1639856946743,"v":"5","h":"s-usc1c-nss-393.firebaseio.com","s":"uyutGjwIKZo9mpHlsvgTzTu4FrvnF2QO"}}}]);

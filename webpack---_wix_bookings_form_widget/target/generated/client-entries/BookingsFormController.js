@@ -1,0 +1,278 @@
+import userController from '/home/builduser/work/7de8fbf09bf2a439/packages/bookings-form-widget/src/components/BookingsForm/controller.ts';
+import createControllerWrapper from '@wix/yoshi-flow-editor/runtime/esm/controllerWrapper.js';
+
+
+import {
+    createHttpClient
+} from '@wix/yoshi-flow-editor/runtime/esm/controller/httpClientProp';
+
+
+
+
+import {
+    initI18n as initI18n
+} from '@wix/yoshi-flow-editor/runtime/esm/i18next/init';
+
+
+
+
+var createExperiments = null;
+var createWidgetExperiments = null;
+
+
+
+var sentryConfig = {
+    DSN: 'https://8a26eadef7db4e1f8c80ebbe1517ed8e@sentry.wixpress.com/1627',
+    id: '8a26eadef7db4e1f8c80ebbe1517ed8e',
+    projectName: 'bookings-form-widget',
+    teamName: 'bookings',
+
+};
+
+var experimentsConfig = {
+    "scopes": ["wix-bookings-client", "wix-bookings-visitor"],
+    "centralized": true
+};
+
+var translationsConfig = {
+    "icuEnabled": true,
+    "defaultTranslationsPath": "/home/builduser/work/7de8fbf09bf2a439/packages/bookings-form-widget/src/assets/locales/messages_en.json",
+    "availableLanguages": ["ar", "bg", "ca", "cs", "da", "de", "el", "en", "es", "fi", "fr", "he", "hi", "hu", "id", "it", "ja", "ko", "lt", "ms", "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sv", "th", "tl", "tr", "uk", "vi", "zh"]
+};
+
+var biConfig = null;
+
+var defaultTranslations = {
+    "app.settings.label": "Configure Widget",
+    "app.back-button.label": "Back",
+    "app.settings.tabs.manage": "Manage",
+    "app.settings.tabs.layout": "Layout",
+    "app.settings.tabs.design": "Design",
+    "app.settings.tabs.text": "Text",
+    "app.settings.tabs.support": "Support",
+    "app.settings.tabs.upgrade": "Upgrade",
+    "app.settings.manage.title": " Booking Form",
+    "app.settings.manage.content": "This is where clients fill out their info and select their payment method. Customize the page and then Preview your site to see how your form appears live. \n",
+    "app.settings.manage.customise-page-button": "Customize Page",
+    "app.settings.manage.manage-form-button": "Edit Form Fields",
+    "app.settings.layout.page-layout.header.label": "Page Layout",
+    "app.settings.layout.titles-alignment.label": "Title alignment",
+    "app.settings.layout.top-bottom-padding.label": "Top & bottom padding",
+    "app.settings.layout.side-padding.label": "Side padding",
+    "app.settings.layout.form-fields-gap.label": "Space between form fields",
+    "app.settings.layout.buton.title": "Button",
+    "app.settings.design.titles.styles": "General Style",
+    "app.settings.design.titles.text": "Text",
+    "app.settings.design.titles.button": "Button",
+    "app.settings.design.titles.selections": "Selections",
+    "app.settings.design.form-field-style.text": "Form Field Style",
+    "app.settings.design.styles.description": "Backgrounds & selections",
+    "app.settings.design.text.description": "Fonts & colors",
+    "app.settings.design.button.description": "Main button design",
+    "app.settings.design.form-field-style.description": "Borders & selections",
+    "app.settings.back-button": "Back",
+    "app.settings.design.styles.titles.general-styles": "General Style",
+    "app.settings.design.styles.general.background-color.label": "Background color",
+    "app.settings.design.styles.general.main-action-color.label": "Selection color",
+    "app.settings.design.styles.general.divider-width.label": "Divider width",
+    "app.settings.design.styles.general.divider-color-and-opacity.label": "Divider color & opacity",
+    "app.settings.design.styles.general.border-width.label": "Widget border width",
+    "app.settings.design.styles.general.border-color-and-opacity.label": "Widget border color & opacity",
+    "app.settings.design.styles.general.corner-radius.label": "Widget corner radius",
+    "app.settings.reset-to-original-design": "Reset to original design",
+    "app.settings.design.styles.titles.form-style": "Form Field Style",
+    "app.settings.design.styles.general.form-border-style.label": "Input field style",
+    "app.settings.design.styles.general.form-border-style.box.label": "Box",
+    "app.settings.design.styles.general.form-border-style.underline.label": "Underline",
+    "app.settings.design.styles.general.form-border-width.label": "Border width",
+    "app.settings.design.styles.general.form-border-color.label": "Border color",
+    "app.settings.design.styles.general.form-border-radius.label": "Corner radius",
+    "app.settings.design.styles.general.form-field-background-color.label": "Input field background color",
+    "app.settings.titles.text": "Text Design",
+    "app.settings.font-picker.title": "Choose your font",
+    "app.settings.design.text.section-titles.label": "Titles",
+    "app.settings.design.text.primary-text.label": "Primary text",
+    "app.settings.design.text.secondary-text.label": "Secondary text",
+    "app.settings.design.text.form-fields.label": "Form field labels",
+    "app.settings.design.text.form-fields-input-text.label": "Form field input text",
+    "app.settings.layout.stretch-to-full-width.label": "Stretch button to full width",
+    "app.settings.titles.button-design.text": "Button Design",
+    "app.settings.design.text.button.text-size.label": "Button text size",
+    "settings-desktop-editor.design.label.regular": "Regular",
+    "settings-desktop-editor.design.label.hover": "Hover",
+    "settings-desktop-editor.design.label.button.font-color": "Font & color",
+    "settings-desktop-editor.design.label.button.background-opacity-color": "Background color & opacity",
+    "settings-desktop-editor.design.label.button.border-opacity-color": "Border color & opacity",
+    "settings-desktop-editor.design.label.button.button-border-width": "Border width",
+    "app.settings.titles.frequently-asked-questions": "Frequently Asked Questions",
+    "app.settings.support.questions.customize-form-page": "Customize form fields",
+    "app.settings.support.questions.form-per-service": "Customize form design",
+    "app.settings.support.questions.view-form-responses": "View form responses",
+    "app.settings.titles.support": "Support",
+    "app.settings.support.contact-customer-care-link": "Contact Customer Care",
+    "settings-desktop-editor.design.label.button.corner-radius": "Corner radius",
+    "settings-desktop-editor.design.label.button.text-color": "Text color",
+    "app.settings.text.form.title": "Form",
+    "app.settings.text.form.title.label": "Form title",
+    "app.settings.text.form.pricing-options.title": "Pricing Options",
+    "app.settings.text.form.payment-options.title": "Payment Options",
+    "app.settings.text.form.pricing-options.tooltip": "Relevant for multiple pricing options offered in the same service",
+    "app.settings.text.form.payment-options.tooltip": "This is where you let your clients choose how they'll pay if you offer multiple payment options for the same service. ",
+    "app.settings.text.form.payment-option.section-title": "Title",
+    "app.settings.text.form.payment-method.label": "Payment selection",
+    "app.settings.text.form.payment-method.title": "Pricing method",
+    "app.settings.text.form.pricing-plan-method.label": "Pricing plan method",
+    "app.settings.text.form.single-session-method.label": "Single session method",
+    "app.settings.text.form.payment-option.label": "Time of payment",
+    "app.settings.text.form.online-option.label": "Online method",
+    "app.settings.text.form.offline-option.label": "In person method",
+    "app.settings.text.form.button.title": "Button",
+    "app.settings.text.form.button-text.label": "Book button",
+    "app.settings.text.form.online-payment-button.label": "Online payment button",
+    "app.settings.text.form.booking-summary-section.title": "Section title",
+    "app.settings.text.form.booking-summary-video-conference.title": "Video conferencing badge",
+    "app.settings.text.form.booking-summary-payment-section.title": "Payment section title",
+    "app.settings.text.form.request-booking.label": "Request booking button",
+    "app.settings.text.form.choose-pricing-plan-button.label": "Choose pricing plan button",
+    "app.settings.text.form.go-to-booking-form-link": "Booking Form",
+    "app.settings.text.form.add-or-edit-text": "To add or edit form fields, go to ",
+    "app.settings.text.form.button-text.tooltip": "For free services or services that can be paid in person or with an existing pricing plan, this button will lead to a confirmation page.",
+    "app.settings.text.form.button-online-payment.tooltip": "For services set to accept payment online, this button will lead to your payment provider's checkout page. For services that can be either paid online or in person, this button will lead to a checkout plan with both options.",
+    "app.settings.text.form.button-request-booking.tooltip": "For services set to require booking approval, this button will lead to a confirmation page that the request has been sent.",
+    "app.settings.text.form.button-choose-a-plan.tooltip": "For services that can be paid for with a pricing plan, but the client either has none or isn't logged in, this button will lead to a page with your offered plans, and then to your payment provider's checkout page.",
+    "app.booking-form.fields.sms-reminder.label": "I want to receive an SMS reminder 24 hours before this session starts",
+    "app.booking-details.duration.units.hours": "{hours} hr",
+    "app.booking-details.duration.units.aria-hours": "{hours} hours",
+    "app.booking-details.duration.units.minutes": "{minutes} min",
+    "app.booking-details.duration.units.aria-minutes": "{minutes} minutes",
+    "app.booking-details.form.payment.title": "Payment",
+    "app.settings.tabs.display": "Display",
+    "app.settings.display.title": "Booking Details",
+    "app.settings.display.video-conference-badge-text": "Show video conferencing badge",
+    "app.settings.titles.button-design.checkbox-and-radio-buttons.title": "Checkbox & Radio Buttons",
+    "app.settings.display.payment-method-title": "Default payment selection",
+    "app.settings.display.payment-time-title": "Default time of payment",
+    "app.settings.display.payment-method-membership": "Buy a Pricing Plan",
+    "app.settings.display.payment-time-online": "Pay now online",
+    "app.settings.display.payment-time-offline": "Pay in person",
+    "app.settings.display.payment-method-single": "Pay for a Single Session",
+    "app.booking-details.locations.client-place.text": "My place",
+    "app.settings.text.form.booking-summary.title": "Booking Summary",
+    "app.payment.options.single-session.text": "Single Session",
+    "app.payment.options.buy-a-pricing-plan.text": "Buy a Pricing Plan",
+    "app.payment.valid-until.text": "Valid until: {validUntil}",
+    "app.payment.summary.subtotal.text": "Subtotal",
+    "app.payment.summary.number-of-participants.text": "{numberOfParticipants, plural, one {# participant} other {# participants}} x {price}",
+    "app.payment.summary.total.text": "Total",
+    "app.payment.summary.deposit.text": "Deposit",
+    "app.payment.summary.pay-now.text": "Pay Now (Deposit)",
+    "app.payment.summary.pay-later.text": "Pay Later",
+    "app.payment.warning.buy-a-pricing-plan.text": "You need to buy a pricing plan to book this service.",
+    "app.payment.warning.not-enough-sessions-left-reduce-participans-number.text": "Your plan, {planName} does not have enough sessions left to book this many participants.",
+    "app.payment.warning.membership-plan-reduce-participans-number.text": "Your plan, {planName} only allows for one booking at a time.",
+    "app.payment.warning.not-enough-sessions-left-reduce-participants-number.text": "Your {numberOfPlans, plural, one {plan} other {plans}}, {planNames} {numberOfPlans, plural, one {does not} other {do not}} have enough sessions left to book this many participants.",
+    "app.payment.warning.membership-plan-reduce-participants-number.text": "Your {numberOfPlans, plural, one {plan} other {plans}}, {planNames} only {numberOfPlans, plural, one {allows} other {allow}} for one booking at a time.",
+    "app.booking-details.course.duration.text": "{sessions} sessions in total",
+    "app.booking-details.course.date-and-time.starts.text": "Starts {date}",
+    "app.payment.coupon.add-a-promo-code.text": "Add a promo code",
+    "app.payment.promo-code.apply.text": "Apply",
+    "app.payment.promo-code.remove.text": "Remove",
+    "app.payment.summary.promo-code.text": "Promo Code",
+    "app.payment.promo-code.expired.aria-label": "Sorry, {coupon} has already expired.",
+    "app.payment.promo-code.been-used.aria-label": "Sorry, {coupon} has already been used.",
+    "app.payment.promo-code.no-longer-available.aria-label": "{coupon} is no longer available.",
+    "app.payment.promo-code.not-exist.aria-label": "Sorry, {coupon} does not exist.",
+    "app.payment.promo-code.invalid-products.aria-label": "Sorry, {coupon} does not apply to this service.",
+    "app.payment.promo-code.one-coupon-per-client.aria-label": "You already used this coupon code",
+    "app.payment.promo-code.succeeded.aria-label": "Your promo code was successfully applied. ",
+    "app.form-inputs.validation-errors.required-field": "This field is required",
+    "app.form-inputs.validation-errors.invalid-email": "Please enter a valid email address",
+    "app.form-inputs.validation-errors.invalid-phone": "Please enter a valid phone number",
+    "app.dummy-data.service": "Service Name",
+    "app.dummy-data.staff": "Staff",
+    "app.dummy-data.location": "Location",
+    "app.dummy-data.date-and-time": "Date and Time",
+    "app.dummy-data.price": "Pay for a Single Session",
+    "app.dummy-data.header.title": "Fill out your details",
+    "app.dummy-data.header.description": "This is a sample booking form. To edit your default form, or create a custom form for a specific service, go to Booking Settings > Booking Form in your dashboard.",
+    "app.dummy-data.field.full-name": "Name",
+    "app.dummy-data.field.full-name.place-holder": "John Doe",
+    "app.dummy-data.field.first-name": "First Name",
+    "app.dummy-data.field.first-name.place-holder": "John",
+    "app.dummy-data.field.last-name": "Last Name",
+    "app.dummy-data.field.last-name.place-holder": "Doe",
+    "app.dummy-data.field.email": "Email",
+    "app.dummy-data.field.email.place-holder": "example@email.com",
+    "app.dummy-data.field.phone": "Phone",
+    "app.dummy-data.field.phone.place-holder": "(000)555-5555",
+    "app.dummy-data.field.add-message": "Add a Message",
+    "app.dummy-data.field.terms": "I agree to the Terms & Conditions",
+    "app.dummy-data.button": "Pay Now",
+    "app.payment.promo-code.errors.invalid-coupon-code": "Invalid promo code",
+    "app.payment.promo-code.errors.one-coupon-per-client": "You already used this coupon code",
+    "app.payment.promo-code.errors.already-used-coupon-code": "Sorry, `{couponCode}` has already been used.",
+    "app.empty-state-page.title": "We couldn't find what you're looking for.",
+    "app.empty-state-page.subtitle": "Please contact us or check out our other services.",
+    "app.booking-details.summary.cta.book.label": "Book Now",
+    "app.booking-details.summary.cta.pay-now.label": "Pay Now",
+    "app.booking-details.summary.cta.request-to-book.label": "Request to Book",
+    "app.booking-details.pricing-plans.choose-a-plan-label": "Choose a plan",
+    "app.booking-details.payment-options.title": "Payment",
+    "app.booking-details.payment-options.how-do-you-want-to-pay.label": "How do you want to pay?",
+    "app.booking-details.payment-options.buy-a-pricing-plan.label": "Buy a Pricing Plan",
+    "app.booking-details.payment-options.pay-for-single-session.label": "Pay for a Single Session",
+    "app.booking-details.payment-options.when-do-you-want-to-pay.label": "When do you want to pay?",
+    "app.booking-details.payment-options.pay-online.label": "Pay now online",
+    "app.booking-details.payment-options.pay-offline.label": "Pay in person",
+    "app.booking-details.payment-section.title": "Payment",
+    "app.booking-details.payment-summary.title": "Payment Details",
+    "app.booking-details.video-conference.text": "Available Online",
+    "app.booking-details.booking-summary.text": "Booking Summary",
+    "app.form.fill-out-your-details.title": "Fill out your details",
+    "app.server-errors.slot-not-available": "The slot you chose is no longer available. Please go back and choose another session.",
+    "app.server-errors.not-enough-spots-left": "There are not enough spots left on this session. Please go back and choose another session.",
+    "app.server-errors.exceeded-capacity": "You can only book up to {numberOfParticipants} participants at a time. Please refresh and try again.",
+    "app.server-errors.users-details": "It looks like there was a technical problem and we weren’t able to load your membership data. Refresh the screen and try again.",
+    "app.server-errors.pricing-plan": "It looks like there was a technical problem and we weren’t able to load the pricing plans for this service. Refresh the screen and try again.",
+    "app.server-errors.default": "There’s a problem booking this right now.  Please refresh and try again, or check back later.",
+    "app.seo.page-title": "Booking Form",
+    "app.seo.empty-state-title": "Not Found",
+    "app.switch-user": "Not {name}? <0>Switch account</0>",
+    "app.switch-user-constant": "Not you? <0>Switch account</0>",
+    "app.login": "Already have an account? <0>Log In</0> for faster booking.",
+    "app.dialog.owner-submit.content": "You are currently signed in with your Wix.com account, please use a different account if you'd like to book.",
+    "app.dialog.owner-submit.confirm-button": "OK",
+    "app.preview.tooltips.back-button": "To see this working, head to your live Published site",
+    "app.preview.tooltips.user-selection-button": "To see this working, head to your live Published site"
+};
+
+var fedopsConfig = null;
+
+import {
+    createVisitorBILogger as biLogger
+} from '/home/builduser/work/7de8fbf09bf2a439/packages/bookings-form-widget/target/generated/bi/createBILogger.ts';
+
+const _controller = createControllerWrapper(userController, {
+    sentryConfig,
+    biConfig,
+    fedopsConfig,
+    experimentsConfig,
+    biLogger,
+    translationsConfig,
+    appName: "Wix Bookings",
+    componentName: "BookingsForm",
+    appDefinitionId: "13d21c63-b5ec-5912-8397-c3a5ddb27a97",
+    componentId: "985e6fc8-ce3f-4cf8-9b85-714c73f48695",
+    projectName: "bookings-form-widget",
+    defaultTranslations,
+    shouldUseEssentials: true,
+    withErrorBoundary: true,
+    localeDistPath: "assets/locales"
+}, {
+    initI18n,
+    createHttpClient,
+    createExperiments,
+});
+
+export const controller = _controller
+export default controller;
